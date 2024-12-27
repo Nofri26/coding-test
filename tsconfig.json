@@ -17,7 +17,7 @@
         "noFallthroughCasesInSwitch": true,
         "baseUrl": ".",
         "paths": {
-            "@/*": ["resources/js/*"]
+            "@/*": ["resources/ts/*"]
         }
     },
     "include": ["resources/ts/**/*.ts", "resources/ts/**/*.tsx", "resources/ts/**/**/*.ts", "resources/ts/**/**/*.tsx", "vite.config.ts"],
