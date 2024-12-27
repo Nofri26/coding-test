@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import Card from '../../Components/Card';
-import Button from '../../Components/Button';
+import Card from '../../components/card';
+import Button from '../../components/button';
 
 const Index = () => {
     const navigateToLogin = useNavigate();

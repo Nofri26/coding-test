@@ -1,6 +1,6 @@
-import Card from '../Components/Card';
-import Button from '../Components/Button';
-import Input from '../Components/Input';
+import Card from '../components/card';
+import Button from '../components/button';
+import Input from '../components/input';
 
 const Home = () => {
     return (

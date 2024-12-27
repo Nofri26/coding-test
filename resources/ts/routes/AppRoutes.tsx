@@ -2,9 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PrivateRoutes from './PrivateRoutes';
 import PublicRoutes from './PublicRoutes';
-import Home from '../Pages/Home/Index';
-import Dashboard from '../Pages/Dashboard/Index';
-import Login from '../Auth/Login';
+import Home from '@/pages/home';
+import Login from '@/auth/login.tsx';
+import Dashboard from '@/pages/dashboard';
 
 const AppRoutes: React.FC = () => {
     return (
