@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import Card from '../Components/Card';
-import Button from '../Components/Button';
+import Card from '../../Components/Card';
+import Button from '../../Components/Button';
 
-const Home = () => {
+const Index = () => {
     const navigateToLogin = useNavigate();
 
     const handleLogin = () => {
@@ -29,4 +29,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Index;
