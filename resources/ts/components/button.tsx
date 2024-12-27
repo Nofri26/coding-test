@@ -28,7 +28,8 @@ const Button: React.FC<ButtonProps> = ({ type = 'button', variant = 'primary', c
                 variantClasses[variant],
                 className
             )}
-            {...rest}>
+            {...rest}
+        >
             {children}
         </button>
     );
