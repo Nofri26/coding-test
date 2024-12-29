@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
-        "target": "ES2020",
+        "target": "ESNext",
         "useDefineForClassFields": true,
-        "lib": ["ES2020", "DOM", "DOM.Iterable"],
+        "lib": ["ESNext", "DOM", "DOM.Iterable"],
         "module": "ESNext",
         "skipLibCheck": true,
         "moduleResolution": "bundler",
@@ -20,7 +20,7 @@
             "@/*": ["resources/ts/*"]
         }
     },
-    "include": ["resources/ts/**/*.ts", "resources/ts/**/*.tsx", "resources/ts/**/**/*.ts", "resources/ts/**/**/*.tsx", "vite.config.ts"],
+    "include": ["resources/ts/**/*.ts", "resources/ts/**/*.tsx", "resources/ts/**/**/*.ts", "resources/ts/**/**/*.tsx", "vite.config.ts", "vite-env.d.ts"],
     "references": [
         {
             "path": "./tsconfig.node.json"
