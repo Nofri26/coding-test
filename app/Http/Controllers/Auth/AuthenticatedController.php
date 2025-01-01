@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
+
 
 class AuthenticatedController extends Controller
 {
@@ -31,8 +33,45 @@ class AuthenticatedController extends Controller
             'message' => 'Login successful.',
             'user' => $user,
             'token' => $token,
-        ]);
+        ], 201);
     }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function register(Request $request): JsonResponse
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|unique:users,username|alpha_dash|max:20|regex:/^\S*$/u',
+            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class . '|regex:/^\S*$/u',
+            'password' => ['required', 'confirmed', Password::defaults()],
+        ]);
+
+        try {
+            $user = User::query()->create([
+                'name' => $request->name,
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+
+            $token = $user->createToken('token')->plainTextToken;
+
+            return response()->json([
+                'message' => 'Register successful.',
+                'user' => $user,
+                'token' => $token,
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Registration failed.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -43,6 +82,6 @@ class AuthenticatedController extends Controller
 
         return response()->json([
             'message' => 'Logged out successfully.'
-        ]);
+        ], 201);
     }
 }
