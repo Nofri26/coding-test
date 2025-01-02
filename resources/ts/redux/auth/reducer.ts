@@ -20,7 +20,7 @@ const reducer = (state = initialState, action: any) => {
         case REGISTER_SUCCESS:
             return { ...state, isAuthenticated: true, user: action.payload, loading: false };
         case LOGOUT:
-            return { ...initialState };
+            return { ...state, isAuthenticated: false, user: null };
         default:
             return state;
     }

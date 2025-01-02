@@ -1,5 +1,5 @@
-export const AUTH_ACTIONS = {
-    LOGIN: '[AUTH] LOGIN',
-    REGISTER: '[AUTH] REGISTER',
-    LOGOUT: '[AUTH] LOGOUT',
+import { ModuleActionTypes } from './content/module/actions';
+
+export const allActions = {
+    ...ModuleActionTypes,
 };

@@ -6,6 +6,7 @@ import Home from '@/pages/home';
 import Login from '@/auth/login/';
 import Dashboard from '@/pages/dashboard';
 import Register from '@/auth/register';
+import Modules from '@/pages/content/modules';
 
 const AppRoutes: React.FC = () => {
     return (
@@ -19,6 +20,7 @@ const AppRoutes: React.FC = () => {
 
                 <Route element={<PrivateRoutes />}>
                     <Route path='/dashboard' element={<Dashboard />} />
+                    <Route path='/modules' element={<Modules />} />
                 </Route>
             </Routes>
         </Router>

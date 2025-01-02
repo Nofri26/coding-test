@@ -2,7 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import api from '@/utils/api';
 import { LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT, REGISTER, REGISTER_FAILURE, REGISTER_SUCCESS } from './actions';
 
-function* loginSaga(action: any): Generator<any, any, any> {
+function* loginSaga(action: any): Generator<any> {
     try {
         const response = yield call(api.post, '/login', action.payload);
 
@@ -15,7 +15,7 @@ function* loginSaga(action: any): Generator<any, any, any> {
     }
 }
 
-function* registerSaga(action: any): Generator<any, any, any> {
+function* registerSaga(action: any): Generator<any> {
     try {
         const response = yield call(api.post, '/register', action.payload);
 
@@ -28,7 +28,7 @@ function* registerSaga(action: any): Generator<any, any, any> {
     }
 }
 
-function* logoutSaga(): Generator<any, any, any> {
+function* logoutSaga(): Generator<any> {
     try {
         yield call(api.post, '/logout');
     } catch {
@@ -36,7 +36,7 @@ function* logoutSaga(): Generator<any, any, any> {
     }
 }
 
-export default function* authSaga() {
+export default function* saga() {
     yield takeLatest(LOGIN, loginSaga);
     yield takeLatest(REGISTER, registerSaga);
     yield takeLatest(LOGOUT, logoutSaga);

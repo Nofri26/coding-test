@@ -26,7 +26,6 @@ api.interceptors.request.use(
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        // console.log(error.response);
         if (error.response?.status === 401) {
             localStorage.removeItem('authToken');
             window.location.href = '/login';

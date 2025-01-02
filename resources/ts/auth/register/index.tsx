@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { registerValidationSchema } from '@/auth/register/validations.tsx';
 import { register } from '@/redux/auth/actions.ts';
+import Select from '@/components/select.tsx';
 
 const Register = () => {
     const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Register = () => {
             name: '',
             username: '',
             email: '',
+            role: '',
             password: '',
             password_confirmation: '',
         },
@@ -79,6 +81,22 @@ const Register = () => {
                                         onBlur={formik.handleBlur}
                                         hasError={!!(formik.touched.email && formik.errors.email)}
                                         errorMessage={formik.touched.email && formik.errors.email ? formik.errors.email : ''}
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <Select
+                                        label='Pilih role'
+                                        name='role'
+                                        options={[
+                                            { value: 'peserta', label: 'Peserta' },
+                                            { value: 'pemateri', label: 'Pemateri' },
+                                        ]}
+                                        value={formik.values.role}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        hasError={!!(formik.touched.role && formik.errors.role)}
+                                        errorMessage={formik.touched.role && formik.errors.role ? formik.errors.role : ''}
                                         required
                                     />
                                 </div>

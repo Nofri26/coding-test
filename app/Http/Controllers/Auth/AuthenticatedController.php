@@ -46,6 +46,7 @@ class AuthenticatedController extends Controller
             'name' => 'required|string|max:255',
             'username' => 'required|string|unique:users,username|alpha_dash|max:20|regex:/^\S*$/u',
             'email' => 'required|string|lowercase|email|max:255|unique:' . User::class . '|regex:/^\S*$/u',
+            'role' => 'required|string|in:peserta,pemateri',
             'password' => ['required', 'confirmed', Password::defaults()],
         ]);
 
@@ -54,6 +55,7 @@ class AuthenticatedController extends Controller
                 'name' => $request->name,
                 'username' => $request->username,
                 'email' => $request->email,
+                'role' => $request->role,
                 'password' => Hash::make($request->password),
             ]);
 
