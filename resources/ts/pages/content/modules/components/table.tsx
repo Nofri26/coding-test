@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { IconPencilBox, IconPlus, IconTrashEmpty } from 'justd-icons';
 
 interface Module {
     id: number;
@@ -28,12 +29,6 @@ interface ModuleTableProps {
 }
 
 const Table: React.FC<ModuleTableProps> = ({ data, pagination, currentPage, handlePageChange, onEdit, onDelete, onAddCompetency }) => {
-    const [openDropdown, setOpenDropdown] = useState<number | null>(null);
-
-    const toggleDropdown = (moduleId: number) => {
-        setOpenDropdown(openDropdown === moduleId ? null : moduleId);
-    };
-
     return (
         <div>
             <div className='overflow-x-auto'>
@@ -55,40 +50,28 @@ const Table: React.FC<ModuleTableProps> = ({ data, pagination, currentPage, hand
                                 <td className='border border-gray-300 px-4 py-2'>{module.description}</td>
                                 <td className='border border-gray-300 px-4 py-2'>{module.creator.name}</td>
                                 <td className='border border-gray-300 px-4 py-2'>
-                                    <div className='relative'>
-                                        <button onClick={() => toggleDropdown(module.id)} className='px-4 py-2 bg-gray-200 text-gray-800 rounded-md'>
-                                            Actions
+                                    <div className={'flex items-center justify-center gap-2'}>
+                                        <button
+                                            onClick={() => {
+                                                onAddCompetency(module.id);
+                                            }}
+                                            className={'bg-slate-500 text-slate-50 hover:bg-slate-600 p-2 rounded-md'}>
+                                            <IconPlus />
                                         </button>
-                                        {openDropdown === module.id && (
-                                            <div className='absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-10'>
-                                                <ul>
-                                                    <li
-                                                        onClick={() => {
-                                                            onEdit(module.id);
-                                                            setOpenDropdown(null);
-                                                        }}
-                                                        className='px-4 py-2 text-gray-800 cursor-pointer hover:bg-gray-100'>
-                                                        Edit
-                                                    </li>
-                                                    <li
-                                                        onClick={() => {
-                                                            onDelete(module.id);
-                                                            setOpenDropdown(null);
-                                                        }}
-                                                        className='px-4 py-2 text-red-500 cursor-pointer hover:bg-gray-100'>
-                                                        Delete
-                                                    </li>
-                                                    <li
-                                                        onClick={() => {
-                                                            onAddCompetency(module.id);
-                                                            setOpenDropdown(null);
-                                                        }}
-                                                        className='px-4 py-2 text-blue-500 cursor-pointer hover:bg-gray-100'>
-                                                        Add Competency
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        )}
+                                        <button
+                                            onClick={() => {
+                                                onEdit(module.id);
+                                            }}
+                                            className={'bg-amber-500 text-slate-50 hover:bg-amber-600 p-2 rounded-md'}>
+                                            <IconPencilBox />
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                onDelete(module.id);
+                                            }}
+                                            className={'bg-red-500 text-slate-50 hover:bg-red-600 p-2 rounded-md'}>
+                                            <IconTrashEmpty />
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
