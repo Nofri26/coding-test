@@ -2,12 +2,15 @@ import { useDispatch } from 'react-redux';
 import Card from '../../components/card';
 import Button from '@/components/button.tsx';
 import { logout } from '@/redux/auth/actions.ts';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         dispatch(logout());
+        navigate('/');
     };
 
     return (

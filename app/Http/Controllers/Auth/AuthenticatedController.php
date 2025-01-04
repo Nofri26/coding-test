@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -10,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
-
 
 class AuthenticatedController extends Controller
 {
@@ -71,7 +69,6 @@ class AuthenticatedController extends Controller
             ], 500);
         }
     }
-
 
     /**
      * Remove the specified resource from storage.
