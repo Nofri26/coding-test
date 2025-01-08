@@ -44,6 +44,7 @@ class AuthenticatedController extends Controller
             'name' => 'required|string|max:255',
             'username' => 'required|string|unique:users,username|alpha_dash|max:20|regex:/^\S*$/u',
             'email' => 'required|string|lowercase|email|max:255|unique:' . User::class . '|regex:/^\S*$/u',
+            'preferred_timezone' => ['required', 'timezone'],
             'password' => ['required', 'confirmed', Password::defaults()],
         ]);
 
@@ -52,6 +53,7 @@ class AuthenticatedController extends Controller
                 'name' => $request->name,
                 'username' => $request->username,
                 'email' => $request->email,
+                'preferred_timezone' => $request->preferred_timezone,
                 'password' => Hash::make($request->password),
             ]);
 

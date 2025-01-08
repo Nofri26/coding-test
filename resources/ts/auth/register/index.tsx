@@ -1,22 +1,31 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Card from '@/components/card';
 import Button from '@/components/button';
 import Input from '@/components/input';
+import { registerValidationSchema } from '@/auth/register/validations.tsx';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { registerValidationSchema } from '@/auth/register/validations.tsx';
 import { register } from '@/redux/auth/actions.ts';
+import timezones from '@/data/timezone.json';
+import ReactSelect from '@/components/react-select.tsx';
 
 const Register = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { isAuthenticated } = useSelector((state: any) => state.auth);
+    const [timezoneOptions, setTimezoneOptions] = useState<{ label: string; value: string }[]>([]);
 
-    useEffect(() => {
+    useEffect((): void => {
         if (isAuthenticated) {
             navigate('/dashboard');
         }
+
+        const timezoneData = Object.entries(timezones).map(([label, value]) => ({
+            label: label,
+            value: value,
+        }));
+        setTimezoneOptions(timezoneData);
     }, [isAuthenticated, navigate]);
 
     const formik = useFormik({
@@ -24,6 +33,7 @@ const Register = () => {
             name: '',
             username: '',
             email: '',
+            preferred_timezone: '',
             password: '',
             password_confirmation: '',
         },
@@ -80,6 +90,21 @@ const Register = () => {
                                         hasError={!!(formik.touched.email && formik.errors.email)}
                                         errorMessage={formik.touched.email && formik.errors.email ? formik.errors.email : ''}
                                         required
+                                    />
+                                </div>
+                                <div>
+                                    <ReactSelect
+                                        instanceId='preferred_timezone'
+                                        label='Preferred Timezone'
+                                        options={timezoneOptions}
+                                        placeholder='Select a timezone'
+                                        value={timezoneOptions.find((option) => option.value === formik.values.preferred_timezone)}
+                                        onChange={(selected) => formik.setFieldValue('preferred_timezone', selected?.value)}
+                                        onBlur={() => formik.handleBlur('preferred_timezone')}
+                                        hasError={!!(formik.touched.preferred_timezone && formik.errors.preferred_timezone)}
+                                        errorMessage={
+                                            formik.touched.preferred_timezone && formik.errors.preferred_timezone ? formik.errors.preferred_timezone : ''
+                                        }
                                     />
                                 </div>
                                 <div>
